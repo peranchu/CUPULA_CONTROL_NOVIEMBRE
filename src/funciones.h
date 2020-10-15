@@ -17,9 +17,9 @@ byte OFFLED[1] = {255}; //Mensaje de Apagado LEDS
 byte msg[1] = {0};      //almacena el boton pulsado
 
 uint32_t volumenRepro = 10;
-uint32_t umbral = 0;
+uint32_t umbral = 100;
 
-extern int CurrentPage = 0;
+int CurrentPage = 0;
 
 //////////////////////////////////////////////////////////////////////
 
@@ -62,45 +62,6 @@ void h0_2PopCallback(void *ptr)
 {
     h0_2.getValue(&volumenRepro);
 
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
-
-    if (volumenRepro == 0)
-    {
-        h0_2.getValue(&volumenRepro);
-    }
     sendCommand(0x06, 0, volumenRepro);
 }
 
@@ -189,36 +150,6 @@ void page4PushCallback(void *ptr)
 void h0_4PopCallback(void *ptr)
 {
     h0_4.getValue(&umbral);
-
-    if (umbral == 0)
-    {
-        h0_4.getValue(&umbral);
-    }
-
-    if (umbral == 0)
-    {
-        h0_4.getValue(&umbral);
-    }
-
-    if (umbral == 0)
-    {
-        h0_4.getValue(&umbral);
-    }
-
-    if (umbral == 0)
-    {
-        h0_4.getValue(&umbral);
-    }
-
-    if (umbral == 0)
-    {
-        h0_4.getValue(&umbral);
-    }
-
-    if (umbral == 0)
-    {
-        h0_4.getValue(&umbral);
-    }
 }
 /////////////// FIN PÁGINA 4 ///////////////////////
 

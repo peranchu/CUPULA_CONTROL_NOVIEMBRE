@@ -47,6 +47,19 @@ void ConfigIni_mp3()
 
     sendCommand(0x07, 0, 5); //Ecualizador 5 Base
     delay(30);
+
+    //Ajuste de slider Volumen pantalla
+    Serial2.print("EstadoVol.val=");
+    Serial2.print(10);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("h0.val=");
+    Serial2.print(10);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Recepcion de datos desde el módulo mp3

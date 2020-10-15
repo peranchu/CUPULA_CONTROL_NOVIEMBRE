@@ -1,23 +1,23 @@
 #include <Arduino.h>
 #include <Nextion.h>
-#include "Control_MP3.h"
 #include "declaraciones.h"
 #include "funciones.h"
+#include "Control_MP3.h"
 
 #define PinBusy 20
 #define PinMicro A0
 
-float lecturaMicro = 0;
-const int sampleWindow = 50;
-unsigned int sample;
+#define TiempoEspera 5000
 
-unsigned int UmbralAmbiente;
-float microfoPantalla;
+unsigned long tiempo = 0;
 
+uint32_t lecturaMicro = 0;
 int GaugeValue = 0;
 
 bool playActual = true;
 bool playanterior = true;
+
+bool interrupcion = false;
 
 void lecturaMicrofono();
 void estadoRepro();
@@ -28,8 +28,8 @@ void setup()
 
   nexInit(115200); //Puerto Comunicación Pantalla (Rx-amarillo 16, Tx-azul 17)
 
-  Serial.begin(9600); //puerto deputación
-  Serial.println("hola");
+  Serial.begin(9600); //puerto depuración
+  //Serial.println("hola");
   pinMode(PinBusy, INPUT);
 
   Serial3.begin(9600); //Puerto comunicación módulo mp3 Serial 3 (14, 15 TX, Rx)
@@ -77,9 +77,33 @@ void loop()
 {
   nexLoop(nex_listen_list);
 
+  estadoRepro();
+
   lecturaMicrofono();
 
-  estadoRepro();
+  //Si se excede del umbral Produce interrupcion
+  if (lecturaMicro > umbral && playActual == false && interrupcion == false)
+  {
+    sendCommand(0x16, 0, 0);             //Apaga el reproductor
+    radio.write(OFFLED, sizeof(OFFLED)); //Apaga los LED
+    interrupcion = true;
+  }
+
+  //Espera 5 segundos para encender rerpoductor y LEDS
+  if (millis() - tiempo >= TiempoEspera)
+  {
+    tiempo = millis();
+
+    //Comprueba que la lectura de micrófono es más baja que el umbral y reproductor STOP
+    if (lecturaMicro < umbral && playActual == true && interrupcion == true)
+    {
+      int numPista;
+      sendCommand(0x0F, 1, numPista = random(1, 6)); //Envía una pista aleatoria al reproductor
+      msg[0] = numPista;
+      radio.write(msg, sizeof(msg)); //Enciende LED
+      interrupcion = false;
+    }
+  }
 }
 
 //Estado Reproductor
@@ -104,42 +128,20 @@ void estadoRepro()
 //Lectura Micrófono
 void lecturaMicrofono()
 {
-  unsigned long startMillis = millis();
-  float peakToPeak = 0;
-  unsigned int signalMax = 0;
-  unsigned int signalMin = 1024;
+  lecturaMicro = analogRead(PinMicro);
 
-  while (millis() - startMillis < sampleWindow)
+  //Dibuja en pantalla la entrada del micrófono
+  if (CurrentPage == 3)
   {
-    sample = analogRead(A0);
-    if (sample < 1024)
-    {
-      if (sample > signalMax)
-      {
-        signalMax = sample;
-      }
-      else if (sample < signalMin)
-      {
-        signalMin = sample;
-      }
-    }
-  }
-  peakToPeak = signalMax - signalMin;
-  double volts = ((peakToPeak * 3.3) / 1024) * 0.707;
-  double first = log10(volts / 0.00631) * 20;
-  double second = first + 94 - 44 - 25;
-  //Serial.println(second);
-
-  if (CurrentPage == 4)
-  {
+    //envio a la caja de número
     Serial2.print("n0.val=");
-    Serial2.print(int(second));
+    Serial2.print(lecturaMicro);
     Serial2.write(0xff);
     Serial2.write(0xff);
     Serial2.write(0xff);
 
     //Evio al reloj
-    GaugeValue = map(int(second), 22, 100, 0, 200);
+    GaugeValue = map(lecturaMicro, 0, 300, 0, 200);
     Serial2.print("va0.val=");
     Serial2.print(GaugeValue);
     Serial2.write(0xff);
