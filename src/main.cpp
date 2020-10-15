@@ -87,22 +87,23 @@ void loop()
     sendCommand(0x16, 0, 0);             //Apaga el reproductor
     radio.write(OFFLED, sizeof(OFFLED)); //Apaga los LED
     interrupcion = true;
+
+    //Espera 5 segundos despúes de la interrupción
+    tiempo = millis();
+    while (millis() < tiempo + TiempoEspera)
+    {
+      lecturaMicrofono();
+    }
   }
 
-  //Espera 5 segundos para encender rerpoductor y LEDS
-  if (millis() - tiempo >= TiempoEspera)
+  //Vuelve a poner en play y enciende los LED
+  if (lecturaMicro < umbral && playActual == true && interrupcion == true)
   {
-    tiempo = millis();
-
-    //Comprueba que la lectura de micrófono es más baja que el umbral y reproductor STOP
-    if (lecturaMicro < umbral && playActual == true && interrupcion == true)
-    {
-      int numPista;
-      sendCommand(0x0F, 1, numPista = random(1, 6)); //Envía una pista aleatoria al reproductor
-      msg[0] = numPista;
-      radio.write(msg, sizeof(msg)); //Enciende LED
-      interrupcion = false;
-    }
+    int numPista;
+    sendCommand(0x0F, 1, numPista = random(1, 6)); //Envía una pista aleatoria al reproductor
+    msg[0] = numPista;
+    radio.write(msg, sizeof(msg)); //Enciende LED
+    interrupcion = false;
   }
 }
 

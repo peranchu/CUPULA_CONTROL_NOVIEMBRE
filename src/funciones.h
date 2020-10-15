@@ -66,6 +66,7 @@ void h0_2PopCallback(void *ptr)
 }
 
 /////////////////// Botones Reproductor página 2 ///////////////////////
+
 //Boton 1
 void b1_2PopCallBack(void *ptr)
 {
