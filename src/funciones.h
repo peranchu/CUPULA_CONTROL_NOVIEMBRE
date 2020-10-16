@@ -21,6 +21,7 @@ uint32_t umbral = 100;
 
 int CurrentPage = 0;
 
+void Hab_Botones();
 //////////////////////////////////////////////////////////////////////
 
 //Configuración inicial Módulo de RADIO
@@ -55,6 +56,7 @@ void page2PushCallback(void *ptr)
 {
     //Serial.println("Entrando 2");
     CurrentPage = 2;
+    Hab_Botones(); //Habilita los botones del reproductor
 }
 
 ////////////////// Volumen Reproductor  página 2 ///////////////////
@@ -70,62 +72,221 @@ void h0_2PopCallback(void *ptr)
 void b1_2PopCallBack(void *ptr)
 {
     //Serial.println("boton1");
-    sendCommand(0x0F, 1, 1);
     msg[0] = 1;
     radio.write(msg, sizeof(msg)); //Activa la secuencia LED
+    sendCommand(0x0F, 1, 1);
+
+    //deshabilita los demas botones
+    Serial2.print("tsw b2,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b3,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b4,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b5,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b6,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Botón 2
 void b2_2PopCallBack(void *ptr)
 {
     //Serial.println("boton2");
-    sendCommand(0x0F, 1, 2);
     msg[0] = 2;
     radio.write(msg, sizeof(msg));
+    sendCommand(0x0F, 1, 2);
+
+    Serial2.print("tsw b1,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b3,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b4,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b5,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b6,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Botón 3
 void b3_2PopCallBack(void *ptr)
 {
     //Serial.println("boton3");
-    sendCommand(0x0F, 1, 3);
     msg[0] = 3;
     radio.write(msg, sizeof(msg));
+    sendCommand(0x0F, 1, 3);
+
+    Serial2.print("tsw b1,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b2,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b4,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b5,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b6,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Botón 4
 void b4_2PopCallBack(void *ptr)
 {
     //Serial.println("boton4");
-    sendCommand(0x0F, 1, 4);
     msg[0] = 4;
     radio.write(msg, sizeof(msg));
+    sendCommand(0x0F, 1, 4);
+
+    Serial2.print("tsw b1,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b2,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b3,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b5,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b6,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Botón 5
 void b5_2PopCallBack(void *ptr)
 {
     //Serial.println("boton5");
-    sendCommand(0x0F, 1, 5);
     msg[0] = 5;
     radio.write(msg, sizeof(msg));
+    delay(30);
+
+    sendCommand(0x0F, 1, 5);
+
+    Serial2.print("tsw b1,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b2,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b3,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b4,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b6,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Botón 6
 void b6_2PopCallBack(void *ptr)
 {
     //Serial.println("boton6");
-    sendCommand(0x0F, 1, 6);
     msg[0] = 6;
     radio.write(msg, sizeof(msg));
+    delay(30);
+
+    sendCommand(0x0F, 1, 6);
+
+    Serial2.print("tsw b1,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b2,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b3,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b4,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b5,0");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
 }
 
 //Botón STOP
 void b7_2PopCallBack(void *ptr)
 {
-    //Serial.println("STOP");
-    sendCommand(0x16, 0, 0);
+    Serial.println("STOP");
     radio.write(OFFLED, sizeof(OFFLED)); //Apaga los LED
+    delay(30);
+
+    sendCommand(0x16, 0, 0);
+
+    Hab_Botones(); //Habilita los botones del reproductor
 }
 
 ///////// FIN PÁGINA 2 //////////////////////////
@@ -152,5 +313,40 @@ void h0_4PopCallback(void *ptr)
     h0_4.getValue(&umbral);
 }
 /////////////// FIN PÁGINA 4 ///////////////////////
+
+//Habilita los botones del reproductor
+void Hab_Botones()
+{
+    //Habilita los botones
+    Serial2.print("tsw b1,1");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b2,1");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b3,1");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b4,1");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b5,1");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+
+    Serial2.print("tsw b6,1");
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+    Serial2.write(0xff);
+}
 
 #endif

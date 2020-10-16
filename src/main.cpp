@@ -125,6 +125,7 @@ void estadoRepro()
     Serial.println("PARADO");
     playanterior = playActual;
     radio.write(OFFLED, sizeof(OFFLED)); //Apaga los LED
+    Hab_Botones();                       //Habilita los botones del Reproductor
   }
 }
 
