@@ -106,6 +106,7 @@ void loop()
     msg[0] = numPista;
     radio.write(msg, sizeof(msg)); //Enciende LED
     interrupcion = false;
+    Des_Botones(); //Deshabilita botones del reproductor
   }
 }
 

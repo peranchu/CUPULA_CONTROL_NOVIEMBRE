@@ -21,7 +21,18 @@ uint32_t umbral = 100;
 
 int CurrentPage = 0;
 
+const int numBotones = 6;
+const char *EstadoBotonesON[numBotones] = {"tsw b1,1", "tsw b2,1", "tsw b3,1",
+                                           "tsw b4,1", "tsw b5,1", "tsw b6,1"};
+
+const char *EstadoBotonesOFF[numBotones] = {"tsw b1,0", "tsw b2,0", "tsw b3,0",
+                                            "tsw b4,0", "tsw b5,0", "tsw b6,0"};
+
+const char *EstadoBotones[numBotones] = {"tsw b1,1", "tsw b2,1", "tsw b3,1",
+                                         "tsw b4,1", "tsw b5,1", "tsw b6,1"};
+
 void Hab_Botones();
+void Des_Botones();
 //////////////////////////////////////////////////////////////////////
 
 //Configuración inicial Módulo de RADIO
@@ -56,7 +67,15 @@ void page2PushCallback(void *ptr)
 {
     //Serial.println("Entrando 2");
     CurrentPage = 2;
-    Hab_Botones(); //Habilita los botones del reproductor
+
+    //Estado Botones Reproductor
+    for (int i = 0; i < numBotones; i++)
+    {
+        Serial2.print(EstadoBotones[i]);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 ////////////////// Volumen Reproductor  página 2 ///////////////////
@@ -76,31 +95,16 @@ void b1_2PopCallBack(void *ptr)
     radio.write(msg, sizeof(msg)); //Activa la secuencia LED
     sendCommand(0x0F, 1, 1);
 
-    //deshabilita los demas botones
-    Serial2.print("tsw b2,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    //OFF 1 a 5
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena el estado
 
-    Serial2.print("tsw b3,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b4,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b5,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b6,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotones[i] = EstadoBotonesOFF[i]); //envia estado a pantalla
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 //Botón 2
@@ -111,30 +115,16 @@ void b2_2PopCallBack(void *ptr)
     radio.write(msg, sizeof(msg));
     sendCommand(0x0F, 1, 2);
 
-    Serial2.print("tsw b1,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    //OFF
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena
 
-    Serial2.print("tsw b3,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b4,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b5,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b6,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotonesOFF[i]); //envía
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 //Botón 3
@@ -145,30 +135,16 @@ void b3_2PopCallBack(void *ptr)
     radio.write(msg, sizeof(msg));
     sendCommand(0x0F, 1, 3);
 
-    Serial2.print("tsw b1,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    //OFF
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena
 
-    Serial2.print("tsw b2,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b4,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b5,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b6,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotonesOFF[i]); //envía
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 //Botón 4
@@ -179,30 +155,16 @@ void b4_2PopCallBack(void *ptr)
     radio.write(msg, sizeof(msg));
     sendCommand(0x0F, 1, 4);
 
-    Serial2.print("tsw b1,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    //OFF
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena
 
-    Serial2.print("tsw b2,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b3,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b5,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b6,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotonesOFF[i]); //envía
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 //Botón 5
@@ -215,30 +177,16 @@ void b5_2PopCallBack(void *ptr)
 
     sendCommand(0x0F, 1, 5);
 
-    Serial2.print("tsw b1,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    //OFF
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena
 
-    Serial2.print("tsw b2,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b3,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b4,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b6,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotonesOFF[i]); //envía
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 //Botón 6
@@ -251,30 +199,16 @@ void b6_2PopCallBack(void *ptr)
 
     sendCommand(0x0F, 1, 6);
 
-    Serial2.print("tsw b1,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    //OFF
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena
 
-    Serial2.print("tsw b2,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b3,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b4,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b5,0");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotonesOFF[i]); //envía
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
 //Botón STOP
@@ -317,36 +251,28 @@ void h0_4PopCallback(void *ptr)
 //Habilita los botones del reproductor
 void Hab_Botones()
 {
-    //Habilita los botones
-    Serial2.print("tsw b1,1");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesON[i]; //Almacena
 
-    Serial2.print("tsw b2,1");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b3,1");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b4,1");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b5,1");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-
-    Serial2.print("tsw b6,1");
-    Serial2.write(0xff);
-    Serial2.write(0xff);
-    Serial2.write(0xff);
+        Serial2.print(EstadoBotonesON[i]); //Envía a pantalla
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
 }
 
+//Deshabilita los botones del reporductor
+void Des_Botones()
+{
+    for (int i = 0; i < numBotones; i++)
+    {
+        EstadoBotones[i] = EstadoBotonesOFF[i]; //Almacena
+
+        Serial2.print(EstadoBotonesOFF[i]); //Envía a pantalla
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+        Serial2.write(0xff);
+    }
+}
 #endif
