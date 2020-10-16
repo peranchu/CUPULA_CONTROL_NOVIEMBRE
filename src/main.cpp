@@ -61,7 +61,8 @@ void setup()
   b4_2.attachPop(b4_2PopCallBack);
   b5_2.attachPop(b5_2PopCallBack);
   b6_2.attachPop(b6_2PopCallBack);
-  b7_2.attachPop(b7_2PopCallBack);
+
+  b7_2.attachPop(b7_2PopCallBack); //Boton STOP
 
   //página3 Micrófono
   page3.attachPush(page3PushCallback);
@@ -99,6 +100,7 @@ void loop()
   //Vuelve a poner en play y enciende los LED
   if (lecturaMicro < umbral && playActual == true && interrupcion == true)
   {
+    //Serial.println("autoplay");
     int numPista;
     sendCommand(0x0F, 1, numPista = random(1, 6)); //Envía una pista aleatoria al reproductor
     msg[0] = numPista;

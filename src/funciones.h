@@ -61,7 +61,6 @@ void page2PushCallback(void *ptr)
 void h0_2PopCallback(void *ptr)
 {
     h0_2.getValue(&volumenRepro);
-
     sendCommand(0x06, 0, volumenRepro);
 }
 

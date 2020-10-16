@@ -20,16 +20,16 @@ NexPage page2 = NexPage(2, 0, "repro");
 //Elementos Pantalla 2 repro
 
 //Botones Reproducción
-NexButton b1_2 = NexButton(2, 2, "b1");
-NexButton b2_2 = NexButton(2, 3, "b2");
-NexButton b3_2 = NexButton(2, 4, "b3");
-NexButton b4_2 = NexButton(2, 7, "b4");
-NexButton b5_2 = NexButton(2, 8, "b5");
-NexButton b6_2 = NexButton(2, 5, "b6");
+NexButton b1_2 = NexButton(2, 5, "b1");
+NexButton b2_2 = NexButton(2, 6, "b2");
+NexButton b3_2 = NexButton(2, 7, "b3");
+NexButton b4_2 = NexButton(2, 8, "b4");
+NexButton b5_2 = NexButton(2, 9, "b5");
+NexButton b6_2 = NexButton(2, 10, "b6");
 
-NexButton b7_2 = NexButton(2, 9, "b7"); //Botón STOP
+NexButton b7_2 = NexButton(2, 3, "b7"); //Botón STOP
 
-NexSlider h0_2 = NexSlider(2, 6, "h0"); //volumen
+NexSlider h0_2 = NexSlider(2, 2, "h0"); //volumen
 
 /////////////// FIN PANTALLA 2 ////////////////////////////
 
