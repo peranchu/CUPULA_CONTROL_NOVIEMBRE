@@ -9,8 +9,8 @@ NexPage page0 = NexPage(0, 0, "intro");
 NexPage page1 = NexPage(1, 0, "menu");
 
 //Elementos página 1 MENU
-NexButton b0_1 = NexButton(1, 1, "b0"); //Botón Ajustes
-NexButton b1_1 = NexButton(1, 2, "b1"); //Botón Inicio
+NexButton b0_1 = NexButton(1, 1, "b0menu"); //Botón Ajustes
+NexButton b1_1 = NexButton(1, 2, "b1menu"); //Botón Inicio
 
 ///////////////// FIN PANTALLA 1 /////////////////////////////
 
@@ -27,9 +27,9 @@ NexButton b4_2 = NexButton(2, 8, "b4");
 NexButton b5_2 = NexButton(2, 9, "b5");
 NexButton b6_2 = NexButton(2, 10, "b6");
 
-NexButton b7_2 = NexButton(2, 3, "b7"); //Botón STOP
+NexButton b7_2 = NexButton(2, 3, "b7stop"); //Botón STOP
 
-NexSlider h0_2 = NexSlider(2, 2, "h0"); //volumen
+NexSlider h0_2 = NexSlider(2, 2, "h0vol"); //volumen
 
 /////////////// FIN PANTALLA 2 ////////////////////////////
 

@@ -47,7 +47,7 @@ void ConfigIni_mp3()
     Serial2.write(0xff);
     Serial2.write(0xff);
 
-    Serial2.print("h0.val=");
+    Serial2.print("h0vol.val=");
     Serial2.print(10);
     Serial2.write(0xff);
     Serial2.write(0xff);

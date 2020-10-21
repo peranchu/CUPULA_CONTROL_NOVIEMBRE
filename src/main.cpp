@@ -13,6 +13,7 @@ unsigned long tiempo = 0;
 
 uint32_t lecturaMicro = 0;
 int GaugeValue = 0;
+int numvalue = 0;
 
 bool playActual = true;
 bool playanterior = true;
@@ -110,6 +111,7 @@ void loop()
   }
 }
 
+//================================ FUNCIONES AUXILIARES ========================
 //Estado Reproductor
 void estadoRepro()
 {
@@ -134,20 +136,20 @@ void estadoRepro()
 void lecturaMicrofono()
 {
   lecturaMicro = analogRead(PinMicro);
-
+  //Serial.println(lecturaMicro);
   //Dibuja en pantalla la entrada del micrófono
   if (CurrentPage == 3)
   {
-    //envio a la caja de número
-    Serial2.print("n0.val=");
-    Serial2.print(lecturaMicro);
+    //Evio al reloj
+    GaugeValue = map(lecturaMicro, 0, 300, 0, 200);
+    Serial2.print("va0.val=");
+    Serial2.print(GaugeValue);
     Serial2.write(0xff);
     Serial2.write(0xff);
     Serial2.write(0xff);
 
-    //Evio al reloj
-    GaugeValue = map(lecturaMicro, 0, 300, 0, 200);
-    Serial2.print("va0.val=");
+    //envio a la caja de número
+    Serial2.print("n0.val=");
     Serial2.print(GaugeValue);
     Serial2.write(0xff);
     Serial2.write(0xff);
